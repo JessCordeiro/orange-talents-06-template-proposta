@@ -7,11 +7,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import com.OrangeTalents.Proposta.validacao.CPFouCNPJ;
+
 public class PropostaRequest {
 	
 	
 
 	@NotBlank
+	@CPFouCNPJ
 	private String documento;
 	
 	@Email
