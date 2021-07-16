@@ -1,4 +1,4 @@
-package com.OrangeTalents.Proposta.proposta;
+package com.OrangeTalents.Proposta.validacao;
 
 import org.hibernate.validator.constraints.CompositionType;
 import org.hibernate.validator.constraints.ConstraintComposition;

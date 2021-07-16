@@ -1,4 +1,4 @@
-package com.OrangeTalents.Proposta.proposta;
+package com.OrangeTalents.Proposta.validacao;
 
 import com.google.common.hash.Hashing;
 

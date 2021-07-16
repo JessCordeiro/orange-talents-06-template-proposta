@@ -1,4 +1,4 @@
-package com.OrangeTalents.Proposta.proposta;
+package com.OrangeTalents.Proposta.validacao;
 
 import java.util.Map;
 
