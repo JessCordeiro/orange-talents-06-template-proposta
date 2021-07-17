@@ -136,6 +136,18 @@ services:
       VAULT_TOKEN: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_ADDR: http://127.0.0.1:8200
 
+
+  proposta:
+    image: 'proposta'
+    ports:
+      - 8081:8080
+    depends_on:
+      # Just a delay to wait for postgres! This is not recommended!
+      - keycloak
+    environment:
+      SERVER_PORT: 8080
+      LOG_LEVEL: INFO
+
 volumes:
   grafana-volume:
   prometheus-volume:
