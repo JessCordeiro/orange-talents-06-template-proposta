@@ -37,7 +37,7 @@ import com.OrangeTalents.Proposta.validacao.Logs;
 
 
 @RestController
-@RequestMapping("/proposta")
+@RequestMapping("/propostas")
 public class PropostaController {
 	
 	

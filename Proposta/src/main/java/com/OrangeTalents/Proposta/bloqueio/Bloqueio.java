@@ -25,6 +25,8 @@ public class Bloqueio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String idExterno;
+	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@JsonFormat(pattern = "yyy-MM-dd@HH:mm:ss", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
 	private LocalDateTime bloqueadoEm;
@@ -39,18 +41,34 @@ public class Bloqueio {
     @Valid
     @ManyToOne
     private Cartao cartao;
+	
+
+	private String ipCliente;
+
+	private String userAgent;
 
 	@Deprecated
 	public Bloqueio() {
 		
 	}
 
-	public Bloqueio(LocalDateTime bloqueadoEm, @NotBlank String sistemaResponsavel, @NotNull boolean ativo,
-			@NotNull @Valid Cartao cartao) {
+
+
+	public Bloqueio( String idExterno, LocalDateTime bloqueadoEm, @NotBlank String sistemaResponsavel,
+			@NotNull boolean ativo, @NotNull @Valid Cartao cartao) {
 		super();
+	
+		this.idExterno = idExterno;
 		this.bloqueadoEm = bloqueadoEm;
 		this.sistemaResponsavel = sistemaResponsavel;
 		this.ativo = ativo;
+		
+	}
+
+	public void setInformacoesDeRequest(String remoteAddr, String agent, Cartao cartao) {
+
+		this.ipCliente = remoteAddr;
+		this.userAgent = agent;
 		this.cartao = cartao;
 	}
 
@@ -58,21 +76,51 @@ public class Bloqueio {
 		return id;
 	}
 
+
+
+	public String getIdExterno() {
+		return idExterno;
+	}
+
+
+
 	public LocalDateTime getBloqueadoEm() {
 		return bloqueadoEm;
 	}
+
+
 
 	public String getSistemaResponsavel() {
 		return sistemaResponsavel;
 	}
 
+
+
 	public boolean isAtivo() {
 		return ativo;
 	}
 
+
+
 	public Cartao getCartao() {
 		return cartao;
 	}
+
+
+
+	public String getIpCliente() {
+		return ipCliente;
+	}
+
+
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	
+
+
 	
 	
 	

@@ -31,7 +31,7 @@ public class BiometriaController {
 		
 		Biometria biometria = request.toModel(id, em);
 		
-		 em.persist(biometria);
+		em.persist(biometria);
 		 
 		
 		URI uri = uriBuilder.path("/biometrias/{id}").buildAndExpand(biometria.getId()).toUri();
