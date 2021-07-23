@@ -24,13 +24,21 @@ public class Aviso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
+	private String destino;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@JsonFormat(pattern = "yyy-MM-dd@HH:mm:ss", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
 	private LocalDateTime validoAte;
 	
-	@NotBlank
-	private String destino;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	@JsonFormat(pattern = "yyy-MM-dd@HH:mm:ss", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
+	private LocalDateTime instanteAviso;
+	
+	private String ipCliente;
+	
+	private String userAgent;
 	
 	@ManyToOne
 	@NotNull @Valid
@@ -41,12 +49,39 @@ public class Aviso {
 	
 	}
 
-	public Aviso(LocalDateTime validoAte, @NotBlank String destino, @NotNull @Valid Cartao cartao) {
+	
+
+	
+
+	public Aviso(Long id, @NotBlank String destino, LocalDateTime validoAte, LocalDateTime instanteAviso,
+			String ipCliente, String userAgent, @NotNull @Valid Cartao cartao) {
 		super();
-		this.validoAte = validoAte;
+		this.id = id;
 		this.destino = destino;
+		this.validoAte = validoAte;
+		this.instanteAviso = instanteAviso;
+		this.ipCliente = ipCliente;
+		this.userAgent = userAgent;
 		this.cartao = cartao;
 	}
+
+
+
+	public void setInformacoesDeRequest(String remoteAddr, String agent, Cartao cartao) {
+
+		this.ipCliente = remoteAddr;
+		this.userAgent = agent;
+		this.cartao = cartao;
+	}
+
+
+
+
+
+
+
+
+
 
 	public Long getId() {
 		return id;

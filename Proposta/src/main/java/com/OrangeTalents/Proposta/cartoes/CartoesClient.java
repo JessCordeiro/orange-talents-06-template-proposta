@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.OrangeTalents.Proposta.aviso.AvisoRequest;
+import com.OrangeTalents.Proposta.aviso.AvisoResponse;
 import com.OrangeTalents.Proposta.bloqueio.BloqueioRequest;
 import com.OrangeTalents.Proposta.bloqueio.BloqueioResponse;
 
@@ -29,6 +31,9 @@ public interface CartoesClient {
 	
 	@GetMapping("/{id}")
 	public CartaoResponse buscaCartaoPorId(@PathVariable Long id);
+	
+	@PostMapping("/{id}/avisos")
+	public AvisoResponse aviso(@PathVariable Long id, AvisoRequest request);
 
 	
 }

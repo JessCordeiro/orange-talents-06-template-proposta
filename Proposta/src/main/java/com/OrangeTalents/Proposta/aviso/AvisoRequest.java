@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import com.OrangeTalents.Proposta.cartoes.Cartao;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,13 +15,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AvisoRequest {
 
+	@NotBlank
+	private String destino;
 	
+	@NotNull
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@JsonFormat(pattern = "yyy-MM-dd@HH:mm:ss", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
 	private LocalDateTime validoAte;
 	
-	@NotBlank
-	private String destino;
+	
+	
 	
 	
 	@Deprecated
@@ -29,11 +34,13 @@ public class AvisoRequest {
 
 
 
-	public AvisoRequest(LocalDateTime validoAte, @NotBlank String destino) {
+	public AvisoRequest(@NotBlank String destino, @NotNull LocalDateTime validoAte) {
 		super();
-		this.validoAte = validoAte;
 		this.destino = destino;
+		this.validoAte = validoAte;
 	}
+
+
 
 
 
@@ -47,11 +54,9 @@ public class AvisoRequest {
 		return destino;
 	}
 
+	
 
 
-	public Aviso toModel(Cartao cartao) {
-        return new Aviso(validoAte, destino, cartao);
-    }
-
+	
 	
 }

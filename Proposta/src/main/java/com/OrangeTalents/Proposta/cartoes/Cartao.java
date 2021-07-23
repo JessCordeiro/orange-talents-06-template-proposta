@@ -114,7 +114,9 @@ public class Cartao {
 	}
 
 	
-
+	public void addAviso(Aviso aviso) {
+		this.avisos.add(aviso);
+	}
 
 
 
