@@ -1,6 +1,7 @@
 package com.OrangeTalents.Proposta.proposta;
 
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -68,6 +69,7 @@ public class Proposta {
 			) {
 		super();
 		this.documento = documento;
+		documento = Base64.getEncoder().encodeToString(documento.getBytes());
 		this.email = email;
 		this.nome = nome;
 		this.endereco = endereco;
