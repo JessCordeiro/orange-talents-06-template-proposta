@@ -14,6 +14,8 @@ import com.OrangeTalents.Proposta.aviso.AvisoRequest;
 import com.OrangeTalents.Proposta.aviso.AvisoResponse;
 import com.OrangeTalents.Proposta.bloqueio.BloqueioRequest;
 import com.OrangeTalents.Proposta.bloqueio.BloqueioResponse;
+import com.OrangeTalents.Proposta.carteira.CarteiraRequest;
+import com.OrangeTalents.Proposta.carteira.CarteiraResponse;
 
 
 
@@ -34,6 +36,9 @@ public interface CartoesClient {
 	
 	@PostMapping("/{id}/avisos")
 	public AvisoResponse aviso(@PathVariable Long id, AvisoRequest request);
+	
+	@PostMapping("/{id}/carteiras")
+	public CarteiraResponse carteira(@PathVariable Long id, CarteiraRequest request);
 
 	
 }

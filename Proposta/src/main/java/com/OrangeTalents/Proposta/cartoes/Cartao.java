@@ -19,12 +19,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 
 import com.OrangeTalents.Proposta.aviso.Aviso;
 import com.OrangeTalents.Proposta.bloqueio.Bloqueio;
 import com.OrangeTalents.Proposta.bloqueio.BloqueioResponse;
 import com.OrangeTalents.Proposta.carteira.Carteira;
-
+import com.OrangeTalents.Proposta.carteira.CarteiraRequest;
+import com.OrangeTalents.Proposta.carteira.Gateway;
 import com.OrangeTalents.Proposta.parcela.Parcela;
 
 import com.OrangeTalents.Proposta.proposta.Proposta;
@@ -117,8 +119,22 @@ public class Cartao {
 	public void addAviso(Aviso aviso) {
 		this.avisos.add(aviso);
 	}
-
-
+	
+	//public void addCarteira(Carteira carteira) {
+		//this.carteiras.add(carteira);
+	//}
+	
+	
+	public Object addCarteira(Gateway gateway, Carteira carteira) {
+		
+		if (carteira.getCarteira().equals(gateway)) {
+			return this.carteiras.add(carteira);
+		}
+		return HttpStatus.BAD_REQUEST;
+	}
+		
+	
+	
 
 	public Long getId() {
 		return id;

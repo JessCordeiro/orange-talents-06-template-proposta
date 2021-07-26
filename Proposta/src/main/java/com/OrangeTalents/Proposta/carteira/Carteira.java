@@ -30,12 +30,21 @@ public class Carteira {
 	@Email
 	private String email;
 	
+	@NotBlank
+	private String carteira;
+	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@JsonFormat(pattern = "yyy-MM-dd@HH:mm:ss", shape = JsonFormat.Shape.STRING, timezone = "America/Sao_Paulo")
 	private LocalDateTime associadaEm;
 	
 	@NotBlank
 	private String emissor;
+	
+	
+	private String ipCliente;
+	
+	private String userAgent;
+	
 	
 	@NotNull
     @Valid
@@ -47,14 +56,30 @@ public class Carteira {
 		
 	}
 
-	public Carteira(@NotBlank @Email String email, LocalDateTime associadaEm, @NotBlank String emissor,
-			@NotNull @Valid Cartao cartao) {
+	
+	
+	
+	
+	public Carteira(Long id, @NotBlank @Email String email, @NotBlank String carteira, LocalDateTime associadaEm,
+			@NotBlank String emissor, @NotNull @Valid Cartao cartao) {
 		super();
+		this.id = id;
 		this.email = email;
+		this.carteira = carteira;
 		this.associadaEm = associadaEm;
 		this.emissor = emissor;
 		this.cartao = cartao;
 	}
+
+
+	public void setInformacoesDeRequest(String remoteAddr, String agent, Cartao cartao) {
+
+		this.ipCliente = remoteAddr;
+		this.userAgent = agent;
+		this.cartao = cartao;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -74,6 +99,30 @@ public class Carteira {
 
 	public Cartao getCartao() {
 		return cartao;
+	}
+
+
+
+
+
+	public String getCarteira() {
+		return carteira;
+	}
+
+
+
+
+
+	public String getIpCliente() {
+		return ipCliente;
+	}
+
+
+
+
+
+	public String getUserAgent() {
+		return userAgent;
 	}
 	
 	
