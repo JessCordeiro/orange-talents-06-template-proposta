@@ -1,6 +1,7 @@
 package com.OrangeTalents.Proposta.biometria;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,7 @@ public class Biometria {
 	public Biometria(String biometria, Cartao cartao) {
 		super();
 		this.biometria = biometria;
+		biometria = Base64.getEncoder().encodeToString(biometria.getBytes());
 		this.cartao = cartao;
 	}
 
