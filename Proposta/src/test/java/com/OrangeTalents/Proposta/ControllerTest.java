@@ -48,12 +48,12 @@ public class ControllerTest {
 	
 	private BigDecimal salario = new BigDecimal(5000);
 	
-	//@BeforeEach
-	//public void persistir() {
-		
-	//	proposta = new Proposta("27199567081","jessica@jessica.com", "Jessica","jisijisjd", salario);
-	//	manager.persist(proposta);
-	//}
+	@BeforeEach
+	public void persistir() {
+	
+		proposta = new Proposta("27199567081","jessica@jessica.com", "Jessica","jisijisjd", salario);
+		manager.persist(proposta);
+	}
 	
 	public static MvcResult performPost(MockMvc mockMvc, String url, int status, ObjectMapper objectMapper, Object request) throws Exception{
 		return mockMvc.perform(MockMvcRequestBuilders
@@ -71,7 +71,7 @@ public class ControllerTest {
 		
 		performPost(mock, "/propostas", 201, objectMapper, proposta);
 		
-		List<Proposta> proposta = manager.createQuery("select * from Produto",  Proposta.class).getResultList();
+		List<Proposta> proposta = manager.createQuery("select * from Proposta",  Proposta.class).getResultList();
 		
 		assertTrue(proposta.size()!=0);
 		
