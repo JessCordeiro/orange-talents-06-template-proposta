@@ -59,9 +59,10 @@ public class PropostaController {
 	}
 
 		Proposta proposta = request.toModel();
-		 logger.info("Proposta criada com sucesso!", proposta.getDocumento());
+		 logger.info("Proposta criada", proposta.getDocumento());
 		repository.save(proposta);
-		return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri()).build();
+		return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}")
+				.buildAndExpand(proposta.getId()).toUri()).build();
 		
 		
 	}
