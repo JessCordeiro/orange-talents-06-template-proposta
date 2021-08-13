@@ -36,6 +36,7 @@ import com.OrangeTalents.Proposta.cartoes.CartaoResponse;
 import com.OrangeTalents.Proposta.cartoes.CartoesClient;
 
 import com.OrangeTalents.Proposta.validacao.Logs;
+import com.OrangeTalents.Proposta.validacao.ResourceNotFoundException;
 
 
 
@@ -97,20 +98,18 @@ public class PropostaController {
 }
 	
 	
-	
+
 	
 	@GetMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> acompanhar(@PathVariable("id") Long id) {
-		Optional<Proposta> proposta = repository.findById(id);
-
-		if (proposta.isPresent()) {
-			return ResponseEntity.ok(proposta);
-		}
-
-		logger.warn("Proposta não encontrada");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	public ResponseEntity<?> acompanhar(@PathVariable("id") Long id) throws ResourceNotFoundException {
+		Optional<Proposta> proposta = Optional.ofNullable(repository.findById(id)
+				.orElseThrow(() ->new ResourceNotFoundException(id)));
+		
+		return ResponseEntity.ok(proposta);
 	}
+	
+	
 	
 		
 } 
