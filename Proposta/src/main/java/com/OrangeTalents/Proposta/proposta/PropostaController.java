@@ -68,36 +68,12 @@ public class PropostaController {
 
 		
 	
-	
-	@Transactional
-	@Scheduled(fixedDelayString = "${periodicidade.executa-operacao}")
-	public void associaCartao() {
-		
-		List<Proposta> propostasDisponiveis =
-                repository.findByStatus(PropostaStatus.ELEGIVEL);
-		
-		propostasDisponiveis.forEach(proposta -> {
-			CartaoResponse  cartaoResponse = cartaoClient.associaCartao(proposta.toCartaoRequest());
-		
-		proposta.toCartaoResponse(cartaoResponse.toModel(proposta));
-		
-		em.merge(proposta);
-		});
-		
-		
-		
-
-	System.out.println("Fim do Scheduled");
-}
 	@GetMapping("/{id}")
+	@Transactional
 	public ResponseEntity<?> acompanhar(@PathVariable("id") Long id) {
 		Optional<Proposta> proposta = repository.findById(id);
-		
-		
 
 		if (proposta.isPresent()) {
-			
-			
 			return ResponseEntity.ok(proposta);
 		}
 
