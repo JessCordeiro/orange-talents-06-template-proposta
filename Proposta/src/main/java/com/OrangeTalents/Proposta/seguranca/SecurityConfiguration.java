@@ -1,4 +1,4 @@
-/*package com.OrangeTalents.Proposta.seguranca;
+package com.OrangeTalents.Proposta.seguranca;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,4 +20,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
 	
-}*/
+}

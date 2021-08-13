@@ -32,10 +32,6 @@ import com.OrangeTalents.Proposta.validacao.Logs;
 
 
 
-
-
-
-
 @RestController
 @RequestMapping("/propostas")
 public class PropostaController {
@@ -54,14 +50,16 @@ public class PropostaController {
 	
 	@PostMapping
 	@Transactional
-	ResponseEntity<?> cadastrar(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder uriComponentsBuilder){
+	public ResponseEntity<?> cadastrar(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder uriComponentsBuilder){
+		
+		
 		if(repository.existsByDocumento(request.getDocumento())) {
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Já existe documento cadastrado");
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(request);
 		
 	}
 
 		Proposta proposta = request.toModel();
-		 logger.info("Proposta Criada com Sucesso!", proposta.getDocumento());
+		 logger.info("Proposta criada com sucesso!", proposta.getDocumento());
 		repository.save(proposta);
 		return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}").buildAndExpand(proposta.getId()).toUri()).build();
 		
@@ -78,23 +76,24 @@ public class PropostaController {
 		List<Proposta> propostasDisponiveis =
                 repository.findByStatus(PropostaStatus.ELEGIVEL);
 		
+		propostasDisponiveis.forEach(proposta -> {
+			CartaoResponse  cartaoResponse = cartaoClient.associaCartao(proposta.toCartaoRequest());
 		
-	while(propostasDisponiveis.size()>0) {
-		Proposta proposta = propostasDisponiveis.get(0);
-		CartaoResponse  cartaoResponse = cartaoClient.associaCartao(proposta.toCartaoRequest());
 		proposta.toCartaoResponse(cartaoResponse.toModel(proposta));
 		
 		em.merge(proposta);
-		propostasDisponiveis.remove(0);
+		});
 		
 		
 		
-	}
+
 	System.out.println("Fim do Scheduled");
 }
 	@GetMapping("/{id}")
 	public ResponseEntity<?> acompanhar(@PathVariable("id") Long id) {
 		Optional<Proposta> proposta = repository.findById(id);
+		
+		
 
 		if (proposta.isPresent()) {
 			

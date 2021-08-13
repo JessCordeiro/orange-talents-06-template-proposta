@@ -26,12 +26,12 @@ public class BiometriaController {
 	private EntityManager em;
 
 	@PostMapping("/{idCartao}")
-	public ResponseEntity<BiometriaResponse> criar(@RequestBody @Valid BiometriaRequest request,
+	public ResponseEntity<?> criar(@RequestBody @Valid BiometriaRequest request,
 			@PathVariable("idCartao") Long id, UriComponentsBuilder uriBuilder) {
 		
 		Biometria biometria = request.toModel(id, em);
 		
-		em.persist(biometria);
+		em.merge(biometria);
 		 
 		
 		URI uri = uriBuilder.path("/biometrias/{id}").buildAndExpand(biometria.getId()).toUri();

@@ -19,7 +19,8 @@ public class PropostaRequest {
 	
 	@Email
 	@NotBlank
-	private String email;
+	private String email; 
+
 	
 	@NotBlank
 	private String nome;

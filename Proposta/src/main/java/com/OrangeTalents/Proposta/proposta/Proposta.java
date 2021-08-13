@@ -21,11 +21,6 @@ import com.OrangeTalents.Proposta.status.StatusRequest;
 
 
 
-
-
-
-
-
 @Entity
 public class Proposta {
 	
@@ -65,7 +60,7 @@ public class Proposta {
 
 	
 
-	public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario
+	public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario  
 			) {
 		super();
 		this.documento = documento;
@@ -79,22 +74,15 @@ public class Proposta {
 		
 	}
 
-	@Override
-	public String toString() {
-		return "Proposta [id=" + id + ", documento=" + documento + ", email=" + email + ", nome=" + nome + ", endereco="
-				+ endereco + ", salario=" + salario + ", status=" + status + "]";
-	}
+
 
 	public void setStatus(StatusProposta status) {
-		if (status == StatusProposta.COM_RESTRICAO)
-			this.status = PropostaStatus.NAO_ELEGIVEL;
-		else if (status == StatusProposta.SEM_RESTRICAO)
-			this.status = PropostaStatus.ELEGIVEL;
+			this.status = status.getPropostaStatus();
+		
+			
 	}
 	
-	public StatusRequest toStatus() {
-		return new StatusRequest(new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario));
-	}
+
 
 	public Long getId() {
 		return id;
@@ -142,10 +130,7 @@ public class Proposta {
 		return cartao;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(getId(), getDocumento(), getNome(), getEmail(), getEndereco(), getSalario(), getStatus());
-	}
+	
 
 	
 	
