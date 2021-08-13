@@ -57,7 +57,8 @@ public class PropostaController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> cadastrar(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder uriComponentsBuilder){
+	public ResponseEntity<?> cadastrar(@Valid @RequestBody PropostaRequest request, 
+			UriComponentsBuilder uriComponentsBuilder){
 		
 		
 		if(repository.existsByDocumento(request.getDocumento())) {
@@ -66,8 +67,9 @@ public class PropostaController {
 	}
 
 		Proposta proposta = request.toModel();
-		 logger.info("Proposta criada", proposta.getDocumento());
 		repository.save(proposta);
+		
+		
 		return ResponseEntity.created(uriComponentsBuilder.path("/propostas/{id}")
 				.buildAndExpand(proposta.getId()).toUri()).build();
 		

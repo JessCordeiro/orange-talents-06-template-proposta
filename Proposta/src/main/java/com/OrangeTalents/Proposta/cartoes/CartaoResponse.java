@@ -102,8 +102,7 @@ public class CartaoResponse {
 	public Cartao toModel(Proposta proposta) {
 
         return new Cartao(this.id,this.emitidoEm, this.titular,
-        		this.bloqueios,
-        		this.avisos, this.carteiras, this.parcelas,
+        		this.bloqueios,this.avisos, this.carteiras, this.parcelas,
                 this.limite, this.renegociacao, this.vencimento, proposta);
     }
 	
