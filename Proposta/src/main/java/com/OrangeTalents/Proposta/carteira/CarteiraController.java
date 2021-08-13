@@ -41,7 +41,8 @@ public class CarteiraController {
 	public ResponseEntity<?> criarCarteira(@Valid @PathVariable Long id, CarteiraRequest request, HttpServletRequest requestInfos,
 			@RequestHeader("user-agent") String agent, UriComponentsBuilder uriComponentsBuilder){
 		
-		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
+		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> 
+		new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
 		
 		try {
 			

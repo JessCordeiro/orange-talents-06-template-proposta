@@ -41,7 +41,8 @@ public class BloqueioController {
 	public ResponseEntity<?> criarBloqueio(@PathVariable @Valid Long id, HttpServletRequest requestInfos,
 			@RequestHeader("user-agent") String agent){
 		
-		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
+		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> 
+		new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
 		try {
 			
 			cartoesClient.bloqueio(cartao.getId(), new BloqueioRequest("Proposta"));
