@@ -37,7 +37,6 @@ public class Scheduled {
 	
 
 	
-	
 	@Transactional
 	@Scheduled(fixedDelayString = "${periodicidade.executa-operacao}")
 	public void associaCartao() {
@@ -46,10 +45,8 @@ public class Scheduled {
                 repository.findByStatus(PropostaStatus.ELEGIVEL);
 		
 		propostasDisponiveis.forEach(proposta -> {
-			CartaoResponse  cartaoResponse = cartaoClient.associaCartao(proposta.toCartaoRequest());
-		
+		CartaoResponse  cartaoResponse = cartaoClient.associaCartao(proposta.toCartaoRequest());
 		proposta.toCartaoResponse(cartaoResponse.toModel(proposta));
-		
 		em.merge(proposta);
 		});
 }

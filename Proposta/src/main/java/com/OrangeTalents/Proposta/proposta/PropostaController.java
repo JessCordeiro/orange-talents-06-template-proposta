@@ -54,7 +54,7 @@ public class PropostaController {
 		
 		
 		if(repository.existsByDocumento(request.getDocumento())) {
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(request);
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
 		
 	}
 
