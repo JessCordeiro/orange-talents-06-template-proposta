@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.OrangeTalents.Proposta.cartoes.Cartao;
 import com.OrangeTalents.Proposta.cartoes.CartaoResponse;
 import com.OrangeTalents.Proposta.cartoes.CartoesClient;
-
+import com.OrangeTalents.Proposta.validacao.ResourceNotFoundException;
 
 import feign.FeignException;
 
@@ -39,10 +39,14 @@ public class BloqueioController {
 	@PostMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> criarBloqueio(@PathVariable @Valid Long id, HttpServletRequest requestInfos,
-			@RequestHeader("user-agent") String agent){
+			@RequestHeader("user-agent") String agent)throws ResourceNotFoundException {
 		
-		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> 
-		new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
+//		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id)).orElseThrow(() -> 
+//		new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não encontrado"));
+		
+		Cartao cartao = Optional.ofNullable(em.find(Cartao.class, id))
+				.orElseThrow(() -> new ResourceNotFoundException(id));
+		
 		try {
 			
 			cartoesClient.bloqueio(cartao.getId(), new BloqueioRequest("Proposta"));

@@ -12,10 +12,6 @@ public class PropostaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PropostaApplication.class, args);
-		
-		
-		
-		
 
 	}
 	 
